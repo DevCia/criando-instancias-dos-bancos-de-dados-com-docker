@@ -86,7 +86,7 @@
 - Vamos entrar no terminal do container para dar acesso externo ao banco de dados => `docker exec -it mysqlContainer bash`.
 - Dentro do container vamos entrar no banco para isso digite a sua senha criada junto com o container => `mysql -u root -p`.
 - No banco vamos selecionar o banco do usuario => `use mysql; select host, user from user;`.
-- Agora vamos alterar a senha do banco para habilitar o acesso externo de fora do container => `ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'suasenhacomLetraMaiusculaENumeros';`
+- Agora vamos alterar a senha do banco para habilitar o acesso externo de fora do container => `ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'suasenhacomLetraMaiusculaENumeros'; quit;`
 
 <a id="elasticsearch"></a>
 ### Elasticsearch
