@@ -12,6 +12,7 @@
 - [Instalar o Sql Server](#sqlserver)
 - [Instalar o postgresSQL](#postgressql)
 - [Instalar o MySql Server](#mysqlserver)
+- [Instalando o Elasticsearch](#elasticsearch)
 
 <a id="objetivo"></a>
 ## :dart: Objetivo
@@ -55,6 +56,7 @@
 
 <a id="sqlserver"></a>
 ### Sql Server
+
 - O Sql Server é o banco de dados relacional desenvolvido e mantido pela microsoft.
 
 - Primeiro vamos baixar a imagem => `docker pull mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04`.
@@ -85,3 +87,12 @@
 - Dentro do container vamos entrar no banco para isso digite a sua senha criada junto com o container => `mysql -u root -p`.
 - No banco vamos selecionar o banco do usuario => `use mysql; select host, user from user;`.
 - Agora vamos alterar a senha do banco para habilitar o acesso externo de fora do container => `ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'suasenhacomLetraMaiusculaENumeros';`
+
+<a id="elasticsearch"></a>
+### Elasticsearch
+
+- O Elasticsearch é um banco feito para pesquisa de um modo rápido e eficiente é com essa ferramenta que uma amazon, um facebook entre outro faz com que aqueles campos de pesquisa tenham tanta velocidade e performance.
+
+- Primeiro vamos baixar a imagem => `docker pull docker.elastic.co/elasticsearch/elasticsearch:7.7.0`.
+- Agora vamos criar uma instância do banco => `docker run --restart=always -d --name elasticsearch -p 9200:9200 -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" docker.elastic.co/elasticsearch/elasticsearch:7.7.0`.
+- Agora para conferir se o container está funcionando você pode acessar esse [link](http://localhost:9200/).
