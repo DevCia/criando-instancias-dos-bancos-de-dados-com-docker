@@ -10,6 +10,8 @@
 - [Instalar o Redis](#redis)
 - [Instalar o MongoDb](#mongodb)
 - [Instalar o Sql Server](#sqlserver)
+- [Instalar o postgresSQL](#postgressql)
+- [Instalar o MySql Server](#mysqlserver)
 
 <a id="objetivo"></a>
 ## :dart: Objetivo
@@ -35,7 +37,7 @@
 - Para instalar o docker siga a [Documentação](https://docs.docker.com/get-docker/), ele está disponivel para todas as plataformas windows, mac e linux.
 
 <a id="redis"></a>
-## Redis
+### Redis
 
 - Esse banco funciona em cache na memoria para controlar filas de processos como envios de email ou filas de escrita no banco de dados.
 
@@ -43,7 +45,7 @@
 - Agora vamos criar uma instância do banco => `docker run --name redisDb -p 6379:6379 -d -t redis:alpine`.
 
 <a id="mongodb"></a>
-## MongoDb
+### MongoDb
 
 - O mongoDb é um banco não relacional de documentos no padrão <b>JSON</b>, que possui drivers para quase todas as linguagens e o seu gerenciador o <b>mongodb compass</b> está disponível para todos os sistemas operacionais.
 
@@ -52,7 +54,7 @@
 - Agora dentro do gerenciador você pode se conectar sem problemas ele não precisa de senha ou usuário.
 
 <a id="sqlserver"></a>
-## Sql Server
+### Sql Server
 - O Sql Server é o banco de dados relacional desenvolvido e mantido pela microsoft.
 
 - Primeiro vamos baixar a imagem => `docker pull mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04`.
@@ -60,3 +62,26 @@
 - Vamos entrar no bash no container para dar o acesso externo ao banco de dados, com o comando => `sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "suasenhacomLetraMaiusculaENumeros" -Q 'ALTER LOGIN SA WITH PASSWORD="suasenhacomLetraMaiusculaENumeros"'`
 
 - Agora você pode acessar o banco com o usuário <b>SA</b> de system administration com a senha que você definiu.
+
+<a id="postgressql"></a>
+### postgresSQL
+
+- O PostgresSQL é um banco de dados relacional muito usado pelo mundo de código aberto mantido pela comunidade.
+
+- Primeiro vamos baixar a imagem => `docker pull postgres`.
+
+- Vamos criar uma instância do banco => `docker run --name postgresDb -e POSTGRES_PASSWORD=suasenhacomLetraMaiusculaENumeros -p 5432:5432 -d postgres`.
+
+- Agora dentro do gerenciador você pode se conectar com a senha que você definiu no usuario <b>root</b>.
+
+<a id="mysqlserver"></a>
+### MySql Server
+
+- O MySql Server é um dos bancos mais usados no mundo é um banco relacional também de código aberto e mantido pela comunidade.
+
+- Primeiro vamos baixar a imagem => `docker pull mysql`.
+- Agora vamos criar uma instância do banco => `docker run -d -p 3306:3306 --name=mysqlContainer  --env=MYSQL_ROOT_PASSWORD="suasenhacomLetraMaiusculaENumeros" mysql`.
+- Vamos entrar no terminal do container para dar acesso externo ao banco de dados => `docker exec -it mysqlContainer bash`.
+- Dentro do container vamos entrar no banco para isso digite a sua senha criada junto com o container => `mysql -u root -p`.
+- No banco vamos selecionar o banco do usuario => `use mysql; select host, user from user;`.
+- Agora vamos alterar a senha do banco para habilitar o acesso externo de fora do container => `ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'suasenhacomLetraMaiusculaENumeros';`
